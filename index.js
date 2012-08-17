@@ -1,7 +1,10 @@
-var server = require('./server'),
-    Router = require('./router')
-    router = new Router();
+var server   = require('./server'),
+    Router   = require('./router')
+    router   = new Router(),
+    Renderer = require('./renderer'),
+    renderer = new Renderer();
 
+renderer.setEngine('jade');
 
 router.get('/address/:city/:state/:zip', function (request, response) {
   response.write(JSON.stringify(request.params));
@@ -24,7 +27,7 @@ router.get('/posts/:slug', function (request, response) {
 });
 
 router.get('/', function (request, response) {
-  response.end('called the index');
+  response.render('index', { layout: 'application' });
 });
 
-server.start(router, 8888);
+server.start(router, 8888, renderer);

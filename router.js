@@ -68,7 +68,9 @@ module.exports = function () {
 
   this.route = function (request, response) {
     var route = this.findRoute(request);
-
+    console.log(route);
+    log.info('Routing: ' + request.pathname);
+    log.info('Parameters: ' + JSON.stringify(request.params));
     if (route) {
       if (route.params) {
         

@@ -6,7 +6,7 @@ var http = require('http'),
     Log  = require('log'),
     log  = new Log('info');
 
-function start (router, port) {
+function start (router, port, renderer) {
 
   function requestListener (request, response) {
 
@@ -21,7 +21,7 @@ function start (router, port) {
       request.params = Object.extended({});
       request.postData = postData;
       request.pathname = url.parse(request.url).pathname;
-      
+
       if (request.pathname != '/' && request.pathname.endsWith('/')) {
         request.pathname = request.pathname.slice(0, -1);
       }
@@ -37,6 +37,10 @@ function start (router, port) {
       poststring.each(function (key, value) {
         request.params[key] = value;
       });
+
+      response.render = function (view, locals) {
+        renderer.render(view, request, response, locals);
+      };
 
       router.route(request, response);
     });
