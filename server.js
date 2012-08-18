@@ -1,10 +1,11 @@
 require('sugar');
 
-var http = require('http'),
-    qs   = require('qs'),
-    url  = require('url'),
-    Log  = require('log'),
-    log  = new Log('info');
+var http    = require('http'),
+    qs      = require('qs'),
+    url     = require('url'),
+    Cookies = require('cookies'),
+    Log     = require('log'),
+    log     = new Log('info');
 
 function start (router, port, renderer) {
 
@@ -40,6 +41,19 @@ function start (router, port, renderer) {
 
       response.render = function (view, locals) {
         renderer.render(view, request, response, locals);
+      };
+
+      // Set up cookies
+      var cookies = new Cookies(request, response);
+
+      response.cookies = {};
+      response.cookies.set = function (name, values, options) {
+        cookies.set(name, values, options);
+      };
+
+      request.cookies = {};
+      request.cookies.get = function (name, options) {
+        cookies.get(name, options);
       };
 
       router.route(request, response);
