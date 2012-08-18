@@ -1,13 +1,7 @@
 var fs   = require('fs'),
     jade = require('jade');
 
-var staticFile = function (path, callback) {
-  fs.readFile(path, function (err, data) {
-    callback(data);
-  });
-};
-
-var render = function (view, request, response, locals) {
+var render = function (view, request, response, staticFile, locals) {
   if (!locals) locals = {};
   var fullPath = 'views/' + view + '.jade';
   fs.exists(fullPath, function (exists) {

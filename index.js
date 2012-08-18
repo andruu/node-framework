@@ -27,8 +27,7 @@ router.get('/posts/:slug', function (request, response) {
 });
 
 router.get('/', function (request, response) {
-  response.cookies.set('name', 'andrew');
-  response.render('index', { layout: 'application' });
+  response.render('index');
 });
 
 server.start(router, 8888, renderer);

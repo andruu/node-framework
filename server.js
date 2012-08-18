@@ -46,14 +46,12 @@ function start (router, port, renderer) {
       // Set up cookies
       var cookies = new Cookies(request, response);
 
-      response.cookies = {};
-      response.cookies.set = function (name, values, options) {
+      response.setCookie = function (name, values, options) {
         cookies.set(name, values, options);
       };
 
-      request.cookies = {};
-      request.cookies.get = function (name, options) {
-        cookies.get(name, options);
+      request.getCookie = function (name, options) {
+        return cookies.get(name, options);
       };
 
       router.route(request, response);
