@@ -1,5 +1,7 @@
+extends ../layouts/application
 block title
-  | Something else
+  | #{title}
 block content
   p Hello #{first_name} #{last_name}
   p #{new Date()}
+  a.btn(href="/") Back

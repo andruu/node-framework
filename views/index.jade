@@ -2,8 +2,11 @@ extends layouts/application
 block title
   | Something else
 block content
+  p Requested HTTP method: #{method}
   p hello these are posts yo!
   p #{new Date()}
+  a.btn(href="/") Get
   a.btn(data-method="post", href="/posts") Post
   a.btn(data-method="put", href="/posts") Put
   a.btn(data-method="delete", href="/posts") Delete
+  a.btn.btn-inverse(href="/users/andrew/weir") Hey Andrew
