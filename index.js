@@ -10,4 +10,11 @@ router.get('/', function (request, response) {
   response.render('index');
 });
 
+router.get('/users/new/:id', function (request, response) {
+  console.log(request.params.id);
+  response.render('users/new', {
+    id: request.params.id
+  });
+});
+
 server.start(router, 8888, renderer);
