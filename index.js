@@ -12,12 +12,6 @@ router.get('/', function (request, response) {
   response.render('index', {method: request.method});
 });
 
-router.get('/:page', function (request, response) {
-  response.render('pages/' + request.params.page, {
-    title: request.params.page,
-    page: request.params.page
-  });
-});
 
 router.get('/posts', function (request, response) {
   response.format({
@@ -52,6 +46,12 @@ router.get('/users/new', function (request, response) {
   response.render('users/new', {title: 'New User'});
 });
 
+router.get('/users/new/:id', function (request, response) {
+  response.render('users/new', {
+    title: 'Hello World'
+  });
+});
+
 router.get('/users/:first_name/:last_name', function (request, response) {
   response.setCookie('name', JSON.stringify({
     first_name: request.params.first_name,
@@ -65,11 +65,11 @@ router.get('/users/:first_name/:last_name', function (request, response) {
   });
 });
 
-router.get('/users/new/:id', function (request, response) {
-  response.render('users/new', {
-    title: 'Hello World'
+router.get('/:page', function (request, response) {
+  response.render('pages/' + request.params.page, {
+    title: request.params.page,
+    page: request.params.page
   });
 });
-
 
 server.start(router, port, renderer);
