@@ -4,6 +4,7 @@ block title
 block content
   p Requested HTTP method: #{method}
   p hello these are posts yo!
+  p Cookie name: #{cookies.get('name') || "View the users page to set cookie"}
   p #{new Date()}
   a.btn(href="/") Get
   a.btn(data-method="post", href="/posts") Post

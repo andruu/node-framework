@@ -8,8 +8,14 @@ html
     .container
       .row
         .span12
+          ul.inline
+            li
+              a(href="/about") About
+            li
+              a(href="/contact") Contact
           .page-header
-            h1 Node Framework (DFM)
+            h1
+              a(href="/") Node Framework (DFM)
           block content
     script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js ")
     script(src="//raw.github.com/rails/jquery-ujs/master/src/rails.js")
