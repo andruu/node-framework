@@ -9,9 +9,13 @@ var server   = require('./lib/server'),
 renderer.setEngine('jade');
 
 router.get('/', function (request, response) {
+  console.log(util.inspect(request.params));
   response.render('index', {method: request.method});
 });
 
+router.post('/contact', function (request, response) {
+  response.json(request.params);
+});
 
 router.get('/posts', function (request, response) {
   response.format({
@@ -42,14 +46,15 @@ router.delete('/posts', function (request, response) {
   response.render('index', {method: request.method});
 });
 
-router.get('/users/new', function (request, response) {
-  response.render('users/new', {title: 'New User'});
-});
-
 router.get('/users/new/:id', function (request, response) {
   response.render('users/new', {
-    title: 'Hello World'
+    title: 'Hello World',
+    id: request.params.id
   });
+});
+
+router.get('/users/new', function (request, response) {
+  response.render('users/new', {title: 'New User'});
 });
 
 router.get('/users/:first_name/:last_name', function (request, response) {
